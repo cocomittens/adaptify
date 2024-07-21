@@ -4,9 +4,3 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
-class ProtectedAPIView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        content = {'message': 'This is a protected endpoint.'}
-        return Response(content)
