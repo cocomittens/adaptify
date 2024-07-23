@@ -1,20 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from common.supabase_client import supabase
 
-# Create your views here.
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from .forms import SignUpForm
+def oauth_login(request):
+    provider = request.GET.get('provider')
+    auth_url = supabase.auth.get_provider_url(provider)
+    return redirect(auth_url)
 
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
+def oauth_callback(request):
+    access_token = request.GET.get('access_token')
+    user = supabase.auth.sign_in(access_token=access_token)
+    if user:
+        return redirect('/')
     else:
-        form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+        return redirect('/login/')
