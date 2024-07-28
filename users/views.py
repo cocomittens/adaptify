@@ -1,15 +1,11 @@
-from django.shortcuts import redirect, render
-from common.supabase_client import supabase
+from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
-def oauth_login(request):
-    provider = request.GET.get('provider')
-    auth_url = supabase.auth.get_provider_url(provider)
-    return redirect(auth_url)
+@api_view(['POST'])
+def login(request):
+    pass
 
-def oauth_callback(request):
-    access_token = request.GET.get('access_token')
-    user = supabase.auth.sign_in(access_token=access_token)
-    if user:
-        return redirect('/')
-    else:
-        return redirect('/login/')
+@api_view(['POST'])
+def signup(request):
+    pass
