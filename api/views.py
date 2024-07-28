@@ -34,5 +34,21 @@ def detect_emotion_text(request):
 
         supabase.from_('Emotions').insert([{ 'user_id': DEMO_USER_ID, 'emotion': emotion, 'confidence': confidence, 'created_at': datetime.now().isoformat() }]).execute()
         return JsonResponse({'emotion': emotion, 'confidence': confidence})
+    elif request.method == 'GET':
+        # data = json.loads(request.body)
+        # user_id = data.get('user_id')
+        # if user_id:
+        #     try:
+        #         response = supabase.from_('Emotions').select('*').eq('user_id', user_id).execute()
+        #         print(response)
+        #     except ValueError:
+        #         return HttpResponseBadRequest("Invalid user_id")
+        # else:
+        response = supabase.from_('Emotions').select('*').execute()
+
+        # if response.error:
+        #     return HttpResponseBadRequest(response.error.message)
+
+        return JsonResponse(response.data, safe=False)
     else:
         return HttpResponseBadRequest("Only POST method is allowed")
