@@ -12,7 +12,7 @@ with open(MODEL_PATH, 'rb') as file:
     model = pickle.load(file)
 
 @login_required
-def detect_emotion(request):
+def detect_emotion_text(request):
     if request.method == 'POST':
         text = request.POST.get('text')
         emotion = model.predict([text])[0]
