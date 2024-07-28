@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 import joblib
 import json
 
-MODEL_PATH = os.path.join(os.path.dirname(__file__), 'text_emotion_detection/models', 'emotion_classifier_pipe_lr.pkl')
+MODEL_PATH = os.path.join(os.path.dirname(__file__), 'text_emotion/models', 'emotion_classifier_pipe_lr.pkl')
 DEMO_USER_ID = config('DEMO_USER_ID')
 
 with open(MODEL_PATH, 'rb') as file:
