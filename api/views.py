@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from ..util.supabase_client import supabase
+from .util.supabase_client import supabase
 from datetime import datetime
 import os
 import pickle
 
-MODEL_PATH = os.path.join(os.path.dirname(__file__), 'emotion_detection', 'model.pkl')
+MODEL_PATH = os.path.join(os.path.dirname(__file__), 'text_emotion_detection/models', 'emotion_classifier_pipe_lr.pkl')
 
 with open(MODEL_PATH, 'rb') as file:
     model = pickle.load(file)
