@@ -36,7 +36,7 @@ SECRET_KEY = 'django-insecure-vu8hm7m!!46*7&68+m1qu38i@(mo7ut^@7)(y%6zp!)ztek$h&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["adaptify-207529373855.herokuapp.com", "https://adaptify-207529373855.herokuapp.com"]
+ALLOWED_HOSTS = ["adaptify-207529373855.herokuapp.com", "adaptify-frontend.vercel.app"]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -68,11 +68,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    ]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://adaptify-frontend.vercel.app"
+    "https://adaptify-frontend.vercel.app",
+    "https://adaptify-207529373855.herokuapp.com/"
 ]
 
 ROOT_URLCONF = 'adaptify.urls'
