@@ -36,6 +36,6 @@ def detect_emotion_text(request):
         return JsonResponse({'emotion': emotion, 'confidence': confidence})
     elif request.method == 'GET':
         response = supabase.from_('Emotions').select('*').execute()
-        return JsonResponse(response.data, safe=False)
+        return JsonResponse(response.data, safe=False)    
     else:
         return HttpResponseBadRequest("Only POST method is allowed")
