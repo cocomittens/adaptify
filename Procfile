@@ -1,0 +1,1 @@
+web: gunicorn adaptify.wsgi --log-file -
