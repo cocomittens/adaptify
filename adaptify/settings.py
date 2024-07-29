@@ -34,7 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-vu8hm7m!!46*7&68+m1qu38i@(mo7ut^@7)(y%6zp!)ztek$h&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -71,7 +71,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "adaptify-frontend.vercel.app"
 ]
 
 ROOT_URLCONF = 'adaptify.urls'
