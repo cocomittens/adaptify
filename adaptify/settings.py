@@ -73,7 +73,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://adaptify-frontend.vercel.app",
-    "https://adaptify-207529373855.herokuapp.com"
+    "https://adaptify-207529373855.herokuapp.com",
+    "https://adaptify-frontend-aq7gimabn-corries-projects.vercel.app"
 ]
 
 ROOT_URLCONF = 'adaptify.urls'
