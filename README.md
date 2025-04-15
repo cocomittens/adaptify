@@ -2,10 +2,10 @@
 Adaptive user interface based on human emotion.
 
 ## Demo
-Try it out (https://adaptify-frontend.vercel.app/dashboard)[here.]
+Try it out [here.](https://adaptify-frontend.vercel.app/dashboard)
 
 ## Frontend
-Frontend repo found (https://github.com/cocomittens/adaptify-frontend)[here.]
+Frontend repo found [here.](https://github.com/cocomittens/adaptify-frontend)
 
 ## Screenshots
 ### Dashboard
