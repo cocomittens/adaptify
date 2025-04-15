@@ -1,6 +1,12 @@
 # Adaptify
 Adaptive user interface based on human emotion.
 
+## Demo
+Try it out (https://adaptify-frontend.vercel.app/dashboard)[here.]
+
+## Frontend
+Frontend repo found (https://github.com/cocomittens/adaptify-frontend)[here.]
+
 ## Screenshots
 ### Dashboard
 <img width="1439" alt="Screen Shot 2024-07-29 at 11 43 22 PM" src="https://github.com/user-attachments/assets/d15038d0-ffb4-4aad-8007-d4c585b47346">
