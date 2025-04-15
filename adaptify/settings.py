@@ -36,7 +36,7 @@ SECRET_KEY = 'django-insecure-vu8hm7m!!46*7&68+m1qu38i@(mo7ut^@7)(y%6zp!)ztek$h&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["adaptify-207529373855.herokuapp.com", "adaptify-frontend.vercel.app"]
+ALLOWED_HOSTS = ["adaptify-207529373855.herokuapp.com", "adaptify-frontend.vercel.app", "adaptify-frontend-aq7gimabn-corries-projects.vercel.app"]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
