@@ -16,3 +16,4 @@ Adaptive user interface based on human emotion.
 ## Planned Features
 * Sign in page and auth
 * Dashboard customization
+* Improve graphs
