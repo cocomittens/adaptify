@@ -15,6 +15,7 @@ Frontend repo found [here.](https://github.com/cocomittens/adaptify-frontend)
 The dashboard displays historical trends and various metrics of users' emotions.
 
 ### Demo
+Click on the "view demo" button in the upper right hand corner to view the demo.
 ### Neutral
 <img width="1437" alt="Screenshot - Neutral" src="https://github.com/user-attachments/assets/1de309eb-6151-47be-b48a-73027b6e0b27">
 Interface showcasing a neutral state without any specific emotional input.
