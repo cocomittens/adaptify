@@ -3,6 +3,8 @@ Adaptive user interface based on human emotion.
 
 Adaptify is designed to adjust its visual elements in response to the emotional cues detected from user-provided text. By analyzing input data, it dynamically modifies the interface to reflect a range of emotional states, offering both insights and a personalized user experience. 
 
+Click on the "view demo" or "view dashboard" button in the upper right hand corner to switch between modes.
+
 ## Demo
 Try it out [here.](https://adaptify-frontend.vercel.app/dashboard)
 
@@ -15,7 +17,6 @@ Frontend repo found [here.](https://github.com/cocomittens/adaptify-frontend)
 The dashboard displays historical trends and various metrics of users' emotions.
 
 ### Demo
-Click on the "view demo" button in the upper right hand corner to view the demo.
 ### Neutral
 <img width="1437" alt="Screenshot - Neutral" src="https://github.com/user-attachments/assets/1de309eb-6151-47be-b48a-73027b6e0b27">
 Interface showcasing a neutral state without any specific emotional input.
