@@ -25,6 +25,5 @@ Demo user interface reflecting detected angry sentiment from the text.
 * Sign in page and auth
 * Dashboard customization
 * UI Component library based on emotional data
-* More features in the dashboard - sort by user, customizable graphs
+* More features in the dashboard - sort by user, customizable graphs, improved responsiveness
 * More demo UI features that respond to emotional data
-* Improved responsiveness
