@@ -1,5 +1,7 @@
 # Adaptify
-Adaptive user interface based on human emotion.
+Adaptive user interface based on human emotion. 
+
+Adaptify is designed to adjust its visual elements in response to the emotional cues detected from user-provided text. By analyzing input data, it dynamically modifies the interface to reflect a range of emotional states, offering both insights and a personalized user experience. 
 
 ## Demo
 Try it out [here.](https://adaptify-frontend.vercel.app/dashboard)
