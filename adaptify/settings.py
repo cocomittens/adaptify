@@ -19,8 +19,9 @@ import os
 env = environ.Env()
 environ.Env.read_env()
 
-SUPABASE_URL = config('SUPABASE_URL')
-SUPABASE_KEY = config('SUPABASE_KEY')
+# Supabase is optional: without it, emotions are stored in the local SQLite database.
+SUPABASE_URL = config('SUPABASE_URL', default='')
+SUPABASE_KEY = config('SUPABASE_KEY', default='')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,12 +32,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vu8hm7m!!46*7&68+m1qu38i@(mo7ut^@7)(y%6zp!)ztek$h&'
+# Set SECRET_KEY in the environment for any real deployment; this default is for local use only.
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-vu8hm7m!!46*7&68+m1qu38i@(mo7ut^@7)(y%6zp!)ztek$h&')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ["adaptify-207529373855.herokuapp.com", "adaptify-frontend.vercel.app", "adaptify-frontend-aq7gimabn-corries-projects.vercel.app"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "adaptify-207529373855.herokuapp.com", "adaptify-frontend.vercel.app", "adaptify-frontend-aq7gimabn-corries-projects.vercel.app"]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -56,7 +58,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +74,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://127.0.0.1:3000",
     "https://adaptify-frontend.vercel.app",
     "https://adaptify-207529373855.herokuapp.com",
     "https://adaptify-frontend-aq7gimabn-corries-projects.vercel.app"
@@ -102,16 +105,24 @@ WSGI_APPLICATION = 'adaptify.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('SUPABASE_DB_NAME'),
-        'USER': config('SUPABASE_DB_USER'),
-        'PASSWORD': config('SUPABASE_DB_PASSWORD'),
-        'HOST': config('SUPABASE_DB_HOST'),
-        'PORT': config('SUPABASE_DB_PORT'),    
+if config('SUPABASE_DB_HOST', default=''):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('SUPABASE_DB_NAME'),
+            'USER': config('SUPABASE_DB_USER'),
+            'PASSWORD': config('SUPABASE_DB_PASSWORD'),
+            'HOST': config('SUPABASE_DB_HOST'),
+            'PORT': config('SUPABASE_DB_PORT'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation

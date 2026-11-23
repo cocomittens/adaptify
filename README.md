@@ -11,6 +11,36 @@ Try it out [here.](https://adaptify-frontend.vercel.app/dashboard)
 ## Frontend
 Frontend repo found [here.](https://github.com/cocomittens/adaptify-frontend)
 
+## Running locally
+Requires Python 3.9–3.11 (the pinned numpy/scikit-learn versions don't support newer Pythons).
+
+```bash
+git clone https://github.com/cocomittens/adaptify
+cd adaptify
+python3.9 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env            # optional; sets DEBUG=True
+python manage.py migrate
+python manage.py seed_demo      # optional; sample history for the dashboard
+python manage.py runserver
+```
+
+The API is now at `http://localhost:8000/api/text/`:
+
+```bash
+# Detect the emotion in a piece of text
+curl -X POST http://localhost:8000/api/text/ \
+  -H 'Content-Type: application/json' \
+  -d '{"text": "I am so happy today"}'
+
+# List all recorded emotions
+curl http://localhost:8000/api/text/
+```
+
+No configuration is needed: by default everything is stored in a local SQLite file.
+To use Supabase instead, fill in the Supabase values in `.env` (see `.env.example`).
+
 ## Screenshots
 ### Dashboard
 <img width="1439" alt="Screenshot - Dashboard" src="https://github.com/user-attachments/assets/d15038d0-ffb4-4aad-8007-d4c585b47346">
