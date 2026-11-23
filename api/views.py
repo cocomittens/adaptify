@@ -14,13 +14,10 @@ DEMO_USER_ID = config('DEMO_USER_ID', default='demo')
 with open(MODEL_PATH, 'rb') as file:
     model = joblib.load(file)
 
-def predict_emotions(text):
-    results = model.predict([text])
-    return str(results[0])
-
-def get_prediction_proba(text):
-    results = model.predict_proba([text])
-    return float(results.max())
+def predict_probabilities(text):
+    """Probability of each emotion for the text, as {emotion: probability}."""
+    results = model.predict_proba([text])[0]
+    return {str(emotion): float(p) for emotion, p in zip(model.classes_, results)}
 
 def save_emotion(emotion, confidence):
     row = {'user_id': DEMO_USER_ID, 'emotion': emotion, 'confidence': confidence, 'created_at': timezone.now().isoformat()}
@@ -38,17 +35,21 @@ def list_emotions():
 def detect_emotion_text(request):
     if request.method == 'POST':
         try:
-            text = json.loads(request.body.decode('utf-8')).get('text')
+            data = json.loads(request.body.decode('utf-8'))
+            text = data.get('text')
         except (ValueError, AttributeError):
-            text = None
+            data, text = {}, None
         if not isinstance(text, str) or not text.strip():
             return HttpResponseBadRequest('Request body must be JSON with a non-empty "text" string')
 
-        emotion = predict_emotions(text)
-        confidence = get_prediction_proba(text)
+        probabilities = predict_probabilities(text)
+        emotion = max(probabilities, key=probabilities.get)
+        confidence = probabilities[emotion]
 
-        save_emotion(emotion, confidence)
-        return JsonResponse({'emotion': emotion, 'confidence': confidence})
+        # "save": false analyzes without recording, e.g. for previews while typing.
+        if data.get('save', True):
+            save_emotion(emotion, confidence)
+        return JsonResponse({'emotion': emotion, 'confidence': confidence, 'probabilities': probabilities})
     elif request.method == 'GET':
         return JsonResponse(list_emotions(), safe=False)
     else:

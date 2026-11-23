@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
+from decouple import config, Csv
 from datetime import timedelta
 import environ
 import os
@@ -38,7 +38,9 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-vu8hm7m!!46*7&68+m1qu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "adaptify-207529373855.herokuapp.com", "adaptify-frontend.vercel.app", "adaptify-frontend-aq7gimabn-corries-projects.vercel.app"]
+# Extra hosts and frontend origins for a deployment come from the environment,
+# as comma-separated lists.
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"] + config('ALLOWED_HOSTS', default='', cast=Csv())
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -75,10 +77,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://adaptify-frontend.vercel.app",
-    "https://adaptify-207529373855.herokuapp.com",
-    "https://adaptify-frontend-aq7gimabn-corries-projects.vercel.app"
-]
+] + config('CORS_ALLOWED_ORIGINS', default='', cast=Csv())
 
 ROOT_URLCONF = 'adaptify.urls'
 
