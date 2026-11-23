@@ -1,6 +1,5 @@
 # Extra packages for api/text_emotion/compare.py. Not needed to run the API.
 -r requirements.txt
-anthropic
 sentence-transformers
 torch
 transformers

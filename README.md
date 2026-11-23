@@ -76,6 +76,26 @@ To retrain the model and print the full evaluation:
 python api/text_emotion/train.py
 ```
 
+### Comparison with other models
+`api/text_emotion/compare.py` trains two more modern models on the same training set and scores all three on the same held-out test set (6,959 texts):
+
+| Model | Accuracy | Macro F1 | Accuracy when confidence is at least 55% (share of texts) |
+|---|---|---|---|
+| Word counts + logistic regression (served by the API) | 65.0% | 0.62 | 77% (67%) |
+| Frozen sentence embeddings (`all-mpnet-base-v2`) + logistic regression | 66.4% | 0.60 | 78% (67%) |
+| Fine-tuned DistilRoBERTa | 73.6% | 0.72 | 80% (86%) |
+
+* A pretrained language model used as-is adds about one point over word counts. General-purpose sentence embeddings do not separate these eight emotions much better than the words themselves.
+* Fine-tuning a small transformer on the dataset adds almost nine points, and it is confident on far more texts (86% against 67%) at slightly higher accuracy. It trains in about five minutes on a laptop.
+* The API still serves the word-count model because it is a 2 MB file with no deep-learning dependencies, which fits free hosting. Serving the fine-tuned model is the next step.
+
+To reproduce the table (this downloads the pretrained models and needs the extra packages):
+
+```bash
+pip install -r requirements-eval.txt
+python api/text_emotion/compare.py
+```
+
 ## Screenshots
 ### Dashboard
 <img alt="Screenshot - Dashboard" src="docs/screenshots/dashboard.png">
@@ -93,5 +113,6 @@ After an angry message: the page takes the emotion's color and the support panel
 ## Planned Features
 * Sign in and per-user data - The demo currently records everything under one demo user.
 * Persistent storage for the hosted demo.
+* Serve the fine-tuned model - It is clearly more accurate, but needs more memory than the free hosting provides.
 * More adaptive components - The support panel is one example; the goal is a reusable set of components driven by emotion.
 * Dashboard filters - Date ranges and per-user views.

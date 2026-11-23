@@ -1,30 +1,26 @@
 {
   "test_size": 6959,
-  "sample_size": 500,
   "models": [
     {
       "model": "Word counts + logistic regression (baseline)",
       "accuracy": 0.6503808018393448,
       "macro_f1": 0.6157842251328828,
       "coverage": 0.665756574220434,
-      "confident_accuracy": 0.7727174616878912,
-      "sample_accuracy": 0.654
+      "confident_accuracy": 0.7727174616878912
     },
     {
       "model": "Frozen embeddings (all-mpnet-base-v2) + logistic regression",
       "accuracy": 0.6638884897255353,
       "macro_f1": 0.5980955139249537,
       "coverage": 0.6743785026584279,
-      "confident_accuracy": 0.7781802684849777,
-      "sample_accuracy": 0.672
+      "confident_accuracy": 0.7781802684849777
     },
     {
       "model": "Fine-tuned distilroberta-base",
       "accuracy": 0.735737893375485,
       "macro_f1": 0.7193000770013982,
       "coverage": 0.8594625664606984,
-      "confident_accuracy": 0.79953185086106,
-      "sample_accuracy": 0.76
+      "confident_accuracy": 0.79953185086106
     }
   ]
 }
