@@ -55,7 +55,7 @@ curl http://localhost:8000/api/text/
 The response contains the top `emotion`, its `confidence`, and the `probabilities` of all eight emotions.
 
 No configuration is needed: by default everything is stored in a local SQLite file.
-To use Supabase instead, fill in the Supabase values in `.env` (see `.env.example`).
+To use Postgres instead, set `DATABASE_URL` in `.env`; to use Supabase, fill in the Supabase values (see `.env.example`).
 
 ## Screenshots
 ### Dashboard

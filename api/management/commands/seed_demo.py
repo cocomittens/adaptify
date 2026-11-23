@@ -20,8 +20,12 @@ class Command(BaseCommand):
         parser.add_argument('--count', type=int, default=120)
         parser.add_argument('--days', type=int, default=30)
         parser.add_argument('--clear', action='store_true', help='Delete existing local emotions first.')
+        parser.add_argument('--if-empty', action='store_true', help='Do nothing if there are already emotions.')
 
     def handle(self, *args, **options):
+        if options['if_empty'] and Emotion.objects.exists():
+            self.stdout.write('Emotions already exist; not adding sample data.')
+            return
         if options['clear']:
             Emotion.objects.all().delete()
         now = timezone.now()

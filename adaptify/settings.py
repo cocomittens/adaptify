@@ -15,6 +15,7 @@ from decouple import config, Csv
 from datetime import timedelta
 import environ
 import os
+from urllib.parse import parse_qsl, unquote, urlparse
 
 env = environ.Env()
 environ.Env.read_env()
@@ -107,7 +108,24 @@ WSGI_APPLICATION = 'adaptify.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-if config('SUPABASE_DB_HOST', default=''):
+# DATABASE_URL (postgres://user:password@host:port/name?options) takes priority,
+# then the separate SUPABASE_DB_* values, then a local SQLite file.
+DATABASE_URL = config('DATABASE_URL', default='')
+
+if DATABASE_URL:
+    url = urlparse(DATABASE_URL)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': unquote(url.path.lstrip('/')),
+            'USER': unquote(url.username or ''),
+            'PASSWORD': unquote(url.password or ''),
+            'HOST': url.hostname or '',
+            'PORT': url.port or 5432,
+            'OPTIONS': dict(parse_qsl(url.query)),
+        }
+    }
+elif config('SUPABASE_DB_HOST', default=''):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
