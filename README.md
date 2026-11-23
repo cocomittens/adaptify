@@ -43,16 +43,16 @@ To use Supabase instead, fill in the Supabase values in `.env` (see `.env.exampl
 
 ## Screenshots
 ### Dashboard
-<img width="1439" alt="Screenshot - Dashboard" src="https://github.com/user-attachments/assets/d15038d0-ffb4-4aad-8007-d4c585b47346">
+<img alt="Screenshot - Dashboard" src="docs/screenshots/dashboard.png">
 The dashboard displays historical trends and various metrics of users' emotions.
 
 ### Demo
 ### Neutral
-<img width="1437" alt="Screenshot - Neutral" src="https://github.com/user-attachments/assets/1de309eb-6151-47be-b48a-73027b6e0b27">
+<img alt="Screenshot - Neutral" src="docs/screenshots/demo-neutral.png">
 Interface showcasing a neutral state without any specific emotional input.
 
 ### Angry
-<img width="1435" alt="Screenshot - Angry" src="https://github.com/user-attachments/assets/c1ab9e53-05e8-427a-a809-49d932c4c8f9">
+<img alt="Screenshot - Angry" src="docs/screenshots/demo-angry.png">
 Interface reflecting detected angry sentiment from the text.
 
 ## Planned Features
