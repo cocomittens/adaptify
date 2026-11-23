@@ -5,8 +5,8 @@ Adaptify is designed to adjust its visual elements in response to the emotional 
 
 Use the Dashboard and Demo links in the header to switch between the two.
 
-<!-- ## Demo -->
-<!-- Try it out [here.](https://adaptify-frontend.vercel.app/dashboard) -->
+## Demo
+Try it out [here.](https://adaptify-frontend.vercel.app/dashboard)
 
 ## Frontend
 Frontend repo found [here.](https://github.com/cocomittens/adaptify-frontend)
