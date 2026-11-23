@@ -41,6 +41,9 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 # Extra hosts and frontend origins for a deployment come from the environment,
 # as comma-separated lists.
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"] + config('ALLOWED_HOSTS', default='', cast=Csv())
+# Render sets this to the service's public hostname.
+if config('RENDER_EXTERNAL_HOSTNAME', default=''):
+    ALLOWED_HOSTS.append(config('RENDER_EXTERNAL_HOSTNAME'))
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
