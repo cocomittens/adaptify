@@ -13,7 +13,7 @@ The demo runs on free hosting, so the first load can take up to a minute while t
 ## Features
 * **Live emotion detection** - The demo analyzes text as you type and shows the probability of each of eight emotions: anger, disgust, fear, joy, neutral, sadness, shame and surprise.
 * **Adaptive interface** - The page takes on the color of the detected emotion, and an example support panel changes its wording and actions to suit it. An angry message, for example, brings "Talk to a person now" and a refund option to the front.
-* **"Not sure" state** - When the model's confidence is below 45%, the interface stays neutral instead of guessing.
+* **"Not sure" state** - When the model's confidence is below 55%, the interface stays neutral instead of guessing.
 * **Dashboard** - Entries per day by emotion, a ranked breakdown with average confidence per emotion, and average confidence over time.
 * **API** - A single endpoint that classifies text and lists recorded entries. It stores data in SQLite by default, or in Supabase when configured.
 
@@ -56,6 +56,25 @@ The response contains the top `emotion`, its `confidence`, and the `probabilitie
 
 No configuration is needed: by default everything is stored in a local SQLite file.
 To use Postgres instead, set `DATABASE_URL` in `.env`; to use Supabase, fill in the Supabase values (see `.env.example`).
+
+## Model
+The classifier is a bag-of-words logistic regression built with scikit-learn: each text becomes a vector of word counts, and a multinomial logistic regression maps those counts to one of eight emotions. It was chosen because it is small, fast enough for a free-tier server, and gives a probability for every emotion.
+
+It is trained on 34,792 labeled texts (`api/text_emotion/data/emotion_dataset.csv`). 20% of them are held out for testing, stratified by emotion. On that held-out set:
+
+| | |
+|---|---|
+| Accuracy across all eight emotions | 65% |
+| Macro F1 | 0.62 |
+| Accuracy when confidence is at least 55% (67% of texts) | 77% |
+
+The model is strongest on fear and joy (F1 0.72) and weakest on disgust (F1 0.32), which has few training examples. It was trained mostly on emotional text, so plain factual sentences are often given a low-confidence emotion. That is why the demo only adapts when confidence is at least 55%.
+
+To retrain the model and print the full evaluation:
+
+```bash
+python api/text_emotion/train.py
+```
 
 ## Screenshots
 ### Dashboard
