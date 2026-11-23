@@ -40,11 +40,16 @@ def load_dataset():
     return [row['Text'] for row in rows], [row['Emotion'] for row in rows]
 
 
-def main():
+def split_dataset():
+    """The fixed train/test split used by every model: (train_texts, test_texts, train_emotions, test_emotions)."""
     texts, emotions = load_dataset()
-    train_texts, test_texts, train_emotions, test_emotions = train_test_split(
+    return train_test_split(
         texts, emotions, test_size=TEST_SIZE, random_state=RANDOM_STATE, stratify=emotions
     )
+
+
+def main():
+    train_texts, test_texts, train_emotions, test_emotions = split_dataset()
 
     model = Pipeline([
         ('cv', CountVectorizer()),
